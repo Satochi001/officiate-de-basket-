@@ -37,17 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
         const Scaffold(
             body: Center(
               child: ScoreBoard(),
-
-
-
-
             ),
 
         );
-
   }
-
-
 }
 
 
@@ -68,25 +61,34 @@ class  _ScoreBoardState extends State<ScoreBoard>{
   //initiazer for both teams
   int teamA = 0;
   int teamB = 0;
-  void AddScore(String team, int scores) {
+  String Score = '00';
+
+  void AddScore(String team) {
+    setState(() {
       if(team == 'a'){
-        if(scores < 10){
+        teamA ++;
+        String score;
+        Score = teamA <= 9 ? "0" + teamA.toString(): teamA.toString();
+        Score;
+        print(Score);
+
+      }else if(team =='b'){
+        teamB ++ ;
+        String score;
+        score = teamB <= 9 ? "0 " + teamB.toString(): teamB.toString();
+        score;
+        print(score);
+      }
 
 
-        }
-      teamA ++;
-      print(teamA);
-
-    }else if(team =='b'){
-      teamB ++ ;
-    }
+    });
   }
 
 
 // function to remove score
   void RemoveScore (String team){
     if(team == 'a'){
-      if(teamA > 0){
+      if(teamA < 0){
         teamA--;
       }else {
         teamA;
@@ -118,7 +120,7 @@ class  _ScoreBoardState extends State<ScoreBoard>{
 
                      ),
 
-                     Text("00"),
+                     const Text(''),
                    ],
                  )
              ),
@@ -141,6 +143,7 @@ class  _ScoreBoardState extends State<ScoreBoard>{
            children:[
              ElevatedButton(
                  onPressed:(){
+                   AddScore("a");
                  },
                  child: const Text("-")
             ),
@@ -152,11 +155,7 @@ class  _ScoreBoardState extends State<ScoreBoard>{
 
            ]
          )
-             )
-
-
-
-
+             ),
 
        ],
 
