@@ -117,7 +117,6 @@ class  _ScoreBoardState extends State<ScoreBoard>{
                    children: [
                      Text(
                        "Team A",
-
                      ),
 
                      const Text(''),
