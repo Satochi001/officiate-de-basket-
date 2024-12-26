@@ -61,77 +61,79 @@ class  _ScoreBoardState extends State<ScoreBoard>{
   //initiazer for both teams
   int teamA = 0;
   int teamB = 0;
-  String Score = '00';
-
-  void AddScore(String team) {
-    setState(() {
-      if(team == 'a'){
-        teamA ++;
-        String score;
-        Score = teamA <= 9 ? "0" + teamA.toString(): teamA.toString();
-        Score;
-        print(Score);
-
-      }else if(team =='b'){
-        teamB ++ ;
-        String score;
-        score = teamB <= 9 ? "0 " + teamB.toString(): teamB.toString();
-        score;
-        print(score);
-      }
+  String increment = "";
 
 
-    });
-  }
-
-
-// function to remove score
-  void RemoveScore (String team){
-    if(team == 'a'){
-      if(teamA < 0){
-        teamA--;
-      }else {
-        teamA;
-      }
-    }else if(team == 'b'){
-      if(teamB > 0){
-        teamB--;
-      }else{
-        teamB;
-      }
-
-    }else{
-      team;
+  String selectedTeam(String team) {
+    increment = team ;
+    if(team == "a"){
+      increment;
+    }else if(team == "b"){
+      increment;
     }
+    return team ;
+
   }
+
+  void updateTeamscore(){
+    if(increment == "a"){
+      teamA++;
+      print('team A $teamA');
+    }else if(increment == "b"){
+      teamB ++;
+      print('team b $teamB');
+    }
+
+  }
+  
+  String formatScore (int Score){
+    return Score <= 9 ? "0${Score}": "${Score}";
+  }
+
+
+
+
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
    return Center(
      child: Column(
        children: [
-         const Row(
+         Row(
            crossAxisAlignment: CrossAxisAlignment.center,
            children: [
              Expanded(
-                 child: Column(
-                   children: [
-                     Text(
-                       "Team A",
-
-                     ),
-
-                     const Text(''),
-                   ],
-                 )
+                 child: GestureDetector(
+                   onTap: (){
+                     selectedTeam("a");
+                   },
+                   child:  Column(
+                       children: [
+                         const Text(
+                           "Team A",
+                         ),
+                         Text("${formatScore(teamA)}"),
+                       ],
+                     )
+                 ),
              ),
-             Spacer(),
+             const Spacer(),
              Expanded(
-                 child: Column(
+               child: GestureDetector(
+                 onTap: (){
+                   selectedTeam("b");
+                 },
+                 child:  Column(
                    children: [
-                     Text("Team B"),
-                     Text("00"),
+                      Text("Team B"),
+                     Text("${formatScore(teamB)}"),
                    ],
-
+                    ),
                  )
              ),
            ],
@@ -143,13 +145,15 @@ class  _ScoreBoardState extends State<ScoreBoard>{
            children:[
              ElevatedButton(
                  onPressed:(){
-                   AddScore("a");
+                   updateTeamscore();
                  },
                  child: const Text("-")
             ),
              Spacer(),
              ElevatedButton(
-                 onPressed:(){},
+                 onPressed:(){
+                   updateTeamscore();
+                 },
                  child: const Text("+")
              ),
 
@@ -166,6 +170,7 @@ class  _ScoreBoardState extends State<ScoreBoard>{
   }
 
 }
+
 
 
 
