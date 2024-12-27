@@ -37,17 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
         const Scaffold(
             body: Center(
               child: ScoreBoard(),
-
-
-
-
             ),
 
         );
-
   }
-
-
 }
 
 
@@ -68,76 +61,77 @@ class  _ScoreBoardState extends State<ScoreBoard>{
   //initiazer for both teams
   int teamA = 0;
   int teamB = 0;
-  String selectedTeam = "";
+  String Score = '00';
 
-  void updateScore(String team){
+  void AddScore(String team) {
     setState(() {
-      selectedTeam = team;
+      if(team == 'a'){
+        teamA ++;
+        String score;
+        Score = teamA <= 9 ? "0" + teamA.toString(): teamA.toString();
+        Score;
+        print(Score);
+
+      }else if(team =='b'){
+        teamB ++ ;
+        String score;
+        score = teamB <= 9 ? "0 " + teamB.toString(): teamB.toString();
+        score;
+        print(score);
+      }
 
 
     });
-
   }
 
-  void increament(){
-    setState(() {
-      if(selectedTeam =="a"){
-        teamA++;
-        print(teamA);
-      }
-      else if(selectedTeam =="b"){
-        teamB++;
-      }
-
-    });
-
-  }
-
-  String updateOneDigit(int score) {
-    return score <= 9 ? "0$score" : "$score";
-  }
 
 // function to remove score
-  void RemoveScore (){
-    setState(() {
-      if(selectedTeam == "a"){
+  void RemoveScore (String team){
+    if(team == 'a'){
+      if(teamA < 0){
         teamA--;
+      }else {
+        teamA;
       }
-      else if(selectedTeam == "b"){
+    }else if(team == 'b'){
+      if(teamB > 0){
         teamB--;
-
+      }else{
+        teamB;
       }
 
-    });
+    }else{
+      team;
+    }
   }
   @override
   Widget build(BuildContext context) {
    return Center(
      child: Column(
        children: [
-          Row(
+         const Row(
            crossAxisAlignment: CrossAxisAlignment.center,
            children: [
              Expanded(
                  child: Column(
                    children: [
-                     const Text("Team A"),
                      Text(
-                       updateOneDigit(teamA),
+                       "Team A",
+
                      ),
+
+                     const Text(''),
                    ],
                  )
              ),
-             const Spacer(),
+             Spacer(),
              Expanded(
                  child: Column(
                    children: [
-                     const Text("Team B"),
-                     Text(
-                         updateOneDigit(teamB),
+                     Text("Team B"),
+                     Text("00"),
+                   ],
 
-                     )
-                 ],
                  )
              ),
            ],
@@ -149,27 +143,19 @@ class  _ScoreBoardState extends State<ScoreBoard>{
            children:[
              ElevatedButton(
                  onPressed:(){
-                   RemoveScore();
-
+                   AddScore("a");
                  },
                  child: const Text("-")
             ),
-             const Spacer(),
+             Spacer(),
              ElevatedButton(
-                 onPressed:(){
-                   print("iiiii");
-                   increament();
-                 },
+                 onPressed:(){},
                  child: const Text("+")
              ),
 
            ]
          )
-             )
-
-
-
-
+             ),
 
        ],
 
