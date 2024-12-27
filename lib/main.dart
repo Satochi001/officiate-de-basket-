@@ -37,10 +37,17 @@ class _MyHomePageState extends State<MyHomePage> {
         const Scaffold(
             body: Center(
               child: ScoreBoard(),
+
+
+
+
             ),
 
         );
+
   }
+
+
 }
 
 
@@ -61,79 +68,76 @@ class  _ScoreBoardState extends State<ScoreBoard>{
   //initiazer for both teams
   int teamA = 0;
   int teamB = 0;
-  String increment = "";
+  String selectedTeam = "";
+
+  void updateScore(String team){
+    setState(() {
+      selectedTeam = team;
 
 
-  String selectedTeam(String team) {
-    increment = team ;
-    if(team == "a"){
-      increment;
-    }else if(team == "b"){
-      increment;
-    }
-    return team ;
+    });
 
   }
 
-  void updateTeamscore(){
-    if(increment == "a"){
-      teamA++;
-      print('team A $teamA');
-    }else if(increment == "b"){
-      teamB ++;
-      print('team b $teamB');
-    }
+  void increament(){
+    setState(() {
+      if(selectedTeam =="a"){
+        teamA++;
+        print(teamA);
+      }
+      else if(selectedTeam =="b"){
+        teamB++;
+      }
+
+    });
 
   }
-  
-  String formatScore (int Score){
-    return Score <= 9 ? "0${Score}": "${Score}";
+
+  String updateOneDigit(int score) {
+    return score <= 9 ? "0$score" : "$score";
   }
 
+// function to remove score
+  void RemoveScore (){
+    setState(() {
+      if(selectedTeam == "a"){
+        teamA--;
+      }
+      else if(selectedTeam == "b"){
+        teamB--;
 
+      }
 
-
-
-
-
-
-
-
+    });
+  }
   @override
   Widget build(BuildContext context) {
    return Center(
      child: Column(
        children: [
-         Row(
+          Row(
            crossAxisAlignment: CrossAxisAlignment.center,
            children: [
              Expanded(
-                 child: GestureDetector(
-                   onTap: (){
-                     selectedTeam("a");
-                   },
-                   child:  Column(
-                       children: [
-                         const Text(
-                           "Team A",
-                         ),
-                         Text("${formatScore(teamA)}"),
-                       ],
-                     )
-                 ),
+                 child: Column(
+                   children: [
+                     const Text("Team A"),
+                     Text(
+                       updateOneDigit(teamA),
+                     ),
+                   ],
+                 )
              ),
              const Spacer(),
              Expanded(
-               child: GestureDetector(
-                 onTap: (){
-                   selectedTeam("b");
-                 },
-                 child:  Column(
+                 child: Column(
                    children: [
-                      Text("Team B"),
-                     Text("${formatScore(teamB)}"),
-                   ],
-                    ),
+                     const Text("Team B"),
+                     Text(
+                         updateOneDigit(teamB),
+
+                     )
+                 ],
                  )
              ),
            ],
@@ -145,21 +149,27 @@ class  _ScoreBoardState extends State<ScoreBoard>{
            children:[
              ElevatedButton(
                  onPressed:(){
-                   updateTeamscore();
+                   RemoveScore();
+
                  },
                  child: const Text("-")
             ),
-             Spacer(),
+             const Spacer(),
              ElevatedButton(
                  onPressed:(){
-                   updateTeamscore();
+                   print("iiiii");
+                   increament();
                  },
                  child: const Text("+")
              ),
 
            ]
          )
-             ),
+             )
+
+
+
+
 
        ],
 
@@ -170,7 +180,6 @@ class  _ScoreBoardState extends State<ScoreBoard>{
   }
 
 }
-
 
 
 
