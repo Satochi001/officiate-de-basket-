@@ -80,13 +80,15 @@ class TimerWidget extends StatefulWidget{
   _timerState createState() => _timerState();
 }
 class _timerState extends State<TimerWidget>{
-
+  bool isPaused = false;
+  String displayText = "start";
   int seconds = 0;
   int minutes = 0;
-  late Timer _timer;
+   Timer ? _timer;
   late TextEditingController _controllerMinutes = TextEditingController();
   late TextEditingController _controllerSeconds = TextEditingController();
   final myProviderInstance = myProvider();
+
 
 
 
@@ -106,17 +108,16 @@ class _timerState extends State<TimerWidget>{
           print(minutes);
         }
         else if(seconds == 0 && minutes == 0){
-          _timer.cancel();
+          _timer?.cancel();
         }
         else{
-          _timer.cancel();
+          _timer?.cancel();
 
         }
 
         _controllerMinutes = TextEditingController(text: '${myProviderInstance.AddDegit(minutes)}');
         _controllerSeconds = TextEditingController(text: '${myProviderInstance.AddDegit(seconds)}');
-
-
+        displayText ='pause';
       });
     });
   }
@@ -124,7 +125,7 @@ class _timerState extends State<TimerWidget>{
   @override
   void dispose() {
 
-    _timer.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -174,11 +175,23 @@ class _timerState extends State<TimerWidget>{
 
             ],
           ),
-          IconButton(
+
+          TextButton(
             onPressed: (){
-              timers();
+                setState(() {
+                  isPaused = !isPaused;
+                    displayText = isPaused ? "start" : "paused";
+                });
+                if(!isPaused){
+                  timers();
+                }else{
+                  if(_timer != null && _timer!.isActive)
+
+                  _timer?.cancel();
+
+                }
             },
-            icon: const Icon(Icons.start),
+             child: Text(displayText),
           ),
         ],
       ),
