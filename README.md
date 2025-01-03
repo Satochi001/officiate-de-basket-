@@ -1,7 +1,6 @@
-# Basket ball  officiating app
+# Basket Ball  officiating app
 
-#officaiting app
-app still under build
+app is  still under build
 
 A new Flutter project.
 
