@@ -1,4 +1,6 @@
 
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
@@ -176,23 +178,35 @@ class _timerState extends State<TimerWidget>{
             ],
           ),
 
-          TextButton(
-            onPressed: (){
-                setState(() {
-                  isPaused = !isPaused;
+          Row(
+            children: <Widget>[
+              TextButton(
+                onPressed: (){},
+                child: Text("Reset"),),
+              TextButton(
+                onPressed: (){
+                  setState(() {
+                    isPaused = !isPaused;
                     displayText = isPaused ? "start" : "paused";
-                });
-                if(!isPaused){
-                  timers();
-                }else{
-                  if(_timer != null && _timer!.isActive)
+                  });
+                  if(!isPaused){
+                    timers();
+                  }else{
+                    if(_timer != null && _timer!.isActive)
 
-                  _timer?.cancel();
+                      _timer?.cancel();
 
-                }
-            },
-             child: Text(displayText),
+                  }
+                },
+                child: Text(displayText),
+              ),
+
+            ],
+
+
+
           ),
+
         ],
       ),
    
@@ -215,6 +229,17 @@ class ScoreBoard extends StatefulWidget{
 
 
 class  _ScoreBoardState extends State<ScoreBoard>{
+
+  //create a list that track how many fouls that a team has
+  final List <String> options =[
+    'option 1',
+    'option 2',
+    'opotion 3',
+    'option 4',
+    'option 5'
+
+  ];
+
 
   // scores functionality in dart .
 
@@ -292,6 +317,15 @@ class  _ScoreBoardState extends State<ScoreBoard>{
                                ),
 
                                Text(myProvider.AddDegit(teamA)),
+
+                               ...options.map((option){
+                                 return RadioListTile(
+                                     onChanged:(value){},
+                                   value: null,
+                                   groupValue: null,
+                                 );
+
+                               })
                              ],
                            )
 
@@ -309,6 +343,17 @@ class  _ScoreBoardState extends State<ScoreBoard>{
                                children: [
                                  Text("Team B"),
                                  Text(myProvider.AddDegit(teamB)),
+                                 ...options.map((option){
+                                   return
+                                   RadioListTile(
+                                       value: null,
+                                       groupValue: null,
+                                       onChanged: (value){},
+
+
+                                   );
+                                 })
+
                                ],
 
                              )
