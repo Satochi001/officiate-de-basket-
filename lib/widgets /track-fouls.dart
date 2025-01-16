@@ -8,47 +8,52 @@ class FoulTrackWidget extends StatefulWidget {
 }
 
 class _FoulTrackingWidgetState extends State<FoulTrackWidget> {
-  List<String>options = [
-    "option 1",
-    "option 2",
-    "option 3",
-    "option 4",
-    "option 5",
-  ];
 
-  String?  _selectedOption;
+  
+  // firstly you get the list
+
+  List<bool> selected = List.generate(5,(index) =>  false );
+  int lastClickedIndex = -1;
+
+  void toggleSelection(int index) {
+    setState(() {
+      selected[index] = !selected[index];
+      lastClickedIndex = index;  // Mark this button as clicked
+// Toggle the selected state
+    });
+  }
+
 
   @override
 
   Widget build(BuildContext context) {
     return SafeArea(
         child: SizedBox(
-                  height:  43,
+                  height:  53,
                   child:  ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: options.length,
-                    itemBuilder:
-                        ( context,  index){
-                      final option = options[index];
-                      return SizedBox(
-                        height: 30,
-                        width: 30,
-                        child:  RadioListTile(
-                            value: option,
-                            groupValue: _selectedOption,
-                            onChanged: (String? value){
-                              setState(() {
-                                _selectedOption = value as String;
-                                print("selected option: $_selectedOption");
-                              });
+                    itemCount: selected.length ,
+                    itemBuilder: (context, index  ) {
+                      return IconButton(
+                          icon: Icon(
+                            selected[index] ? Icons.radio_button_checked :
+                            Icons.radio_button_unchecked,
+                            color: selected[index] ? Colors.blue : Colors.grey,
 
+                          ),
+                          onPressed: (index == lastClickedIndex || index == lastClickedIndex + 1)
+                              ? () {
+                            toggleSelection(index);
+                            // If the last clicked button is unchecked, move lastClickedIndex backward
+                            if (!selected[index]) {
+                              lastClickedIndex = index - 1;
                             }
-                        ),
+                          }
+                          : null,
+
                       );
-
-                        },
-
-                  )
+                    }
+                  ),
               ),
 
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../providers /widgets0-provider.dart';
 import '../widgets /track-fouls.dart';
@@ -95,7 +96,13 @@ class  _ScoreBoardState extends State<ScoreBoard>{
                                 "Team A",
                               ),
 
-                              Text(myProvider.AddDegit(teamA)),
+
+                              Text(
+                                  myProvider.AddDegit(teamA),
+                                  style: GoogleFonts.robotoMono(fontSize: 40),
+
+
+                              ),
                               const SizedBox(
                                   child:  FoulTrackWidget()
                               ),
@@ -115,7 +122,12 @@ class  _ScoreBoardState extends State<ScoreBoard>{
                           child: Column(
                             children: [
                               const Text("Team B"),
-                              Text(myProvider.AddDegit(teamB)),
+                              Text(
+                                  myProvider.AddDegit(teamB),
+                                  style: GoogleFonts.robotoMono(fontSize: 40),
+
+
+                              ),
                               const SizedBox(
                                   child:  FoulTrackWidget()
                               ),
