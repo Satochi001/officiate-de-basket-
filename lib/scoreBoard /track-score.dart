@@ -76,14 +76,14 @@ class  _ScoreBoardState extends State<ScoreBoard>{
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return SafeArea(
         child: Consumer<myProvider>
           (builder :
             (context, myProvider, child)=>
             Column(
               children: [
                 Row(
-                  //crossAxisAlignment: CrossAxisAlignment.,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
                       child: GestureDetector(
@@ -99,13 +99,11 @@ class  _ScoreBoardState extends State<ScoreBoard>{
 
                               Text(
                                   myProvider.AddDegit(teamA),
-                                  style: GoogleFonts.robotoMono(fontSize: 40),
+                                  style: GoogleFonts.robotoMono(fontSize: 80),
 
 
                               ),
-                              const SizedBox(
-                                  child:  FoulTrackWidget()
-                              ),
+
                             ],
                           )
 
@@ -124,13 +122,11 @@ class  _ScoreBoardState extends State<ScoreBoard>{
                               const Text("Team B"),
                               Text(
                                   myProvider.AddDegit(teamB),
-                                  style: GoogleFonts.robotoMono(fontSize: 40),
+                                  style: GoogleFonts.robotoMono(fontSize: 80),
 
 
                               ),
-                              const SizedBox(
-                                  child:  FoulTrackWidget()
-                              ),
+
                             ],
                           ),
 

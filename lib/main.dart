@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:my_flutter_app/providers%20/widgets0-provider.dart';
 import 'package:my_flutter_app/scoreBoard%20/track-score.dart';
 import 'package:my_flutter_app/timer%20/time-tracker.dart';
+import 'package:my_flutter_app/widgets%20/track-fouls.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -48,13 +49,26 @@ class _MyHomePageState extends State<MyHomePage> {
         const Scaffold(
             body: Center(
               child: Column(
-                children: [
+                mainAxisAlignment: MainAxisAlignment.center, // Center vertically
+                crossAxisAlignment: CrossAxisAlignment.stretch,                 children: [
                      ScoreBoard(),
-                     Expanded(
-                         child: TimerWidget(),
+                     Row(
+                       children: [
+                          Expanded(
+                            child:  SizedBox(
+                                 child:  FoulTrackWidget()
 
+                             )
+                         ),
+                         Spacer(),
+                          Expanded(
+                           child:  SizedBox(
+                            child:  FoulTrackWidget()
+                           ),
+                          ),
+                       ],
                      ),
-
+                     TimerWidget(),
                 ],
 
               ),

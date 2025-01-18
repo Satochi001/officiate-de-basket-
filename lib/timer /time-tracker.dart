@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../main.dart';
 import '../providers /widgets0-provider.dart';
@@ -70,35 +71,50 @@ class _timerState extends State<TimerWidget>{
 
 
   Widget build(BuildContext context){
-    return Center(
-      child: Column(
+    return SafeArea(
+      child:  Padding(
+        padding:
+        const EdgeInsets.symmetric(
+            vertical: 20, horizontal: 60
+        ),
+
+        child: Column(
         children: [
           Row(
             children: [
-              Flexible(child:
+              Expanded(child:
               TextField(
+                style: GoogleFonts.robotoMono(fontSize: 80),
+
                 controller: _controllerMinutes,
-                decoration: const InputDecoration(
+                decoration: const
+                InputDecoration(
+                  hintText: "00",
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                  )
                 ),
                 keyboardType: TextInputType.number,
                 onChanged:(value){
                   setState(() {
                     minutes = int.tryParse(value) ?? 0 ;
                   });
-
                 },
               ),
-
-
               ),
-              const SizedBox(
-                width: 10,
-              ),
+              const Spacer(),
               Flexible(
                 child:
                 TextField(
+                  style: GoogleFonts.robotoMono(fontSize: 80),
+
                   controller: _controllerSeconds,
                   decoration: const InputDecoration(
+                    hintText: "00",
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+
 
                   ),
                   keyboardType: TextInputType.number,
@@ -141,8 +157,9 @@ class _timerState extends State<TimerWidget>{
 
 
           ),
+            ]
+        ),
 
-        ],
       ),
 
 
