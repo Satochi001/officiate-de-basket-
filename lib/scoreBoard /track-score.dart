@@ -75,104 +75,83 @@ class  _ScoreBoardState extends State<ScoreBoard>{
 
 
   @override
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Consumer<myProvider>
-          (builder :
-            (context, myProvider, child)=>
-            Column(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: GestureDetector(
-                          onTap : (){
+    return Column (
+      children :[
+        Container(
+         child:  Consumer<myProvider>(
+            builder: (context, myProvider, child) => Column(
+                children: [
+                  Row( // Row for Team A and Team B
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
                             selectedTeams("a");
                           },
                           child: Column(
                             children: [
-                              const Text(
-                                "Team A",
-                              ),
-
-
+                              const Text("Team A"),
                               Text(
-                                  myProvider.AddDegit(teamA),
-                                  style: GoogleFonts.robotoMono(fontSize: 80),
-
-
+                                myProvider.AddDegit(teamA),
+                                style: GoogleFonts.robotoMono(fontSize: 80),
                               ),
-
                             ],
-                          )
-
+                          ),
+                        ),
                       ),
-                    ),
-                    Spacer(),
-                    Expanded(
+                      Expanded(
                         child: GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             selectedTeams("b");
                             print("this is the second click");
-
                           },
                           child: Column(
                             children: [
                               const Text("Team B"),
                               Text(
-                                  myProvider.AddDegit(teamB),
-                                  style: GoogleFonts.robotoMono(fontSize: 80),
-
-
+                                myProvider.AddDegit(teamB),
+                                style: GoogleFonts.robotoMono(fontSize: 80),
                               ),
-
                             ],
                           ),
-
                         ),
-
-                    ),
-
-                  ],
-                ),
-
-
-                Padding(
-                    padding: const
-                    EdgeInsets.symmetric(horizontal: 180, vertical: 50),
+                      ),
+                    ],
+                  ),
+                  Padding( // Padding and buttons are now outside the Row
+                    padding: const EdgeInsets.symmetric(horizontal: 180, vertical: 50),
                     child: Row(
-                        children:[
-                          ElevatedButton(
-                              onPressed:(){
-                                RemoveScore();
-                                print("this is actually working");
-                              },
-                              child: const Text("-")
-                          ),
-                          Spacer(),
-                          ElevatedButton(
-                              onPressed:(){
-                                AddScore();
-                                print("this is actually working 1");
-                              },
-                              child: const Text("+")
-                          ),
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            RemoveScore();
+                            print("this is actually working");
+                          },
+                          child: const Text("-"),
+                        ),
+                        Spacer(),
+                        ElevatedButton(
+                          onPressed: () {
+                            AddScore();
+                            print("this is actually working 1");
+                          },
+                          child: const Text("+"),
+                        ),
+                      ],
+                    ),
+                  ),
+                ]
+            ),
+          ),
 
-                        ]
-                    )
-                ),
-
-              ],
-
-            )
-
-        )
-
+        ),
+    ],
     );
-
   }
-
 }
 
 

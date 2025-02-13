@@ -28,38 +28,36 @@ class _FoulTrackingWidgetState extends State<FoulTrackWidget> {
 
   Widget build(BuildContext context) {
     return SafeArea(
-          child : SizedBox(
-            height:  53,
-            child :ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: selected.length ,
-                itemBuilder: (context, index  ) {
-                  return IconButton(
-                    icon: Icon(
-                      selected[index] ? Icons.radio_button_checked :
-                      Icons.radio_button_unchecked,
-                      color: selected[index] ? Colors.blue : Colors.grey,
+            child: SizedBox(
+                height:  53,
+                child: Container(
+                    child : ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: selected.length ,
+                  itemBuilder: (context, index  ) {
+                    return IconButton(
+                      icon: Icon(
+                        selected[index] ? Icons.radio_button_checked :
+                        Icons.radio_button_unchecked,
+                        color: selected[index] ? Colors.blue : Colors.grey,
 
-                    ),
-                    onPressed: (index == lastClickedIndex || index == lastClickedIndex + 1)
-                        ? () {
-                      toggleSelection(index);
-                      // If the last clicked button is unchecked, move lastClickedIndex backward
-                      if (!selected[index]) {
-                        lastClickedIndex = index - 1;
+                      ),
+                      onPressed: (index == lastClickedIndex || index == lastClickedIndex + 1)
+                          ? () {
+                        toggleSelection(index);
+                        // If the last clicked button is unchecked, move lastClickedIndex backward
+                        if (!selected[index]) {
+                          lastClickedIndex = index - 1;
+                        }
                       }
-                    }
-                        : null,
+                          : null,
 
-                  );
-                }
-            ),
-          ),
-
-
-
-
-    );
-
+                    );
+                  }
+              ),
+            )
+            )
+          );
   }
 }
+
