@@ -1,6 +1,6 @@
 # Basket Ball  officiating app
 
-app still under construction .
+app currently on mvp .
 
 A new Flutter project.
 
