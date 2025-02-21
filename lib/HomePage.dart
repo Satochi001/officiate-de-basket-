@@ -16,46 +16,69 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext  context){
-    return Scaffold(
-      body: LayoutBuilder(
-     builder: (BuildContext context, BoxConstraints constraints){
-       return const  Center(
-         child: SingleChildScrollView(
-           padding: EdgeInsets.symmetric(horizontal: 100),
+    return Scaffold (
+    body: Container(
+        child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+         return SingleChildScrollView(
            child: Column(
-             mainAxisAlignment: MainAxisAlignment.center, // Center vertically
+             mainAxisAlignment: MainAxisAlignment.center,
              children: [
-               ScoreBoard(),
+               Stack(
+                 children :[
+                   const ScoreBoard(),
+                   Positioned(
+                       top: 290,
+                       child: Row(
+                         children: [
+                           Container(
+                             decoration: const BoxDecoration(
+                               borderRadius : BorderRadius.only(
+                                   bottomLeft: Radius.circular(10),
+                                   bottomRight: Radius.circular(0)
 
-               Row(
-                 children: [
-                   Expanded(
-                       child:
-                       SizedBox(
-                         child:
-                         FoulTrackWidget(),
-                       )
+                               ),
+                               color:  Colors.greenAccent,
+
+                             ),
+                             width: 300,
+                             child:  FoulTrackWidget(),
+                           ),
+
+
+                           Container(
+                             decoration: const BoxDecoration(
+                               borderRadius : BorderRadius.only(
+                                   bottomLeft: Radius.circular(0),
+                                   bottomRight: Radius.circular(10)
+
+                               ),
+                               color:  Colors.greenAccent,
+
+                             ),
+                             width: 200,
+                             child: FoulTrackWidget(),
+
+                           )
+                         ],
+                       ),
                    ),
-                   Spacer(),
-                   Expanded(
-                     child:  SizedBox(
-                         child:  FoulTrackWidget()
-                     ),
-                   ),
-                 ],
+
+
+
+                 ]
                ),
 
                TimerWidget(),
 
-             ],
 
+             ],
            ),
 
-         ),
-       );
-
-     },
-     )
+            );
+          }
+        )
+    )
 
     );
 

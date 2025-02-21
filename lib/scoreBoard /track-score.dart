@@ -71,85 +71,89 @@ class  _ScoreBoardState extends State<ScoreBoard>{
       }
     });
   }
-
-
-
-  @override
   @override
   Widget build(BuildContext context) {
-    return Column (
-      children :[
-        Container(
-         child:  Consumer<myProvider>(
-            builder: (context, myProvider, child) => Column(
-                children: [
-                  Row( // Row for Team A and Team B
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            selectedTeams("a");
-                          },
-                          child: Column(
-                            children: [
-                              const Text("Team A"),
-                              Text(
-                                myProvider.AddDegit(teamA),
-                                style: GoogleFonts.robotoMono(fontSize: 80),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            selectedTeams("b");
-                            print("this is the second click");
-                          },
-                          child: Column(
-                            children: [
-                              const Text("Team B"),
-                              Text(
-                                myProvider.AddDegit(teamB),
-                                style: GoogleFonts.robotoMono(fontSize: 80),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding( // Padding and buttons are now outside the Row
-                    padding: const EdgeInsets.symmetric(horizontal: 180, vertical: 50),
-                    child: Row(
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            RemoveScore();
-                            print("this is actually working");
-                          },
-                          child: const Text("-"),
-                        ),
-                        Spacer(),
-                        ElevatedButton(
-                          onPressed: () {
-                            AddScore();
-                            print("this is actually working 1");
-                          },
-                          child: const Text("+"),
-                        ),
-                      ],
+    return Container(
+        color:  Colors.green,
+      margin: const EdgeInsets.only(
+        bottom: 60
+      ),
+    child: Column(
+      children: [
+    Consumer<myProvider>(builder:
+    (context, myProvider, child)=>
+   Row (
+     mainAxisAlignment: MainAxisAlignment.center,
+            children:[
+              Column(
+                  children:[
+                    Text(
+                      'teamA',
+                      style: GoogleFonts.robotoMono(fontSize: 20),
                     ),
+                    GestureDetector(
+                        onTap:(){
+                          selectedTeams("a");
+                        },
+                        child : Text(
+                          myProvider.AddDegit(teamA),
+                          style: GoogleFonts.robotoMono(fontSize: 120),
+                        )
+                    )
+                  ]
+              ),
+              SizedBox(width: 120),
+              Column(
+                children: [
+                  Text(
+                    'teamB',
+                    style : GoogleFonts.robotoMono(fontSize: 20),
                   ),
-                ]
-            ),
-          ),
+                  GestureDetector(
+                    onTap:(){
+                      selectedTeams('b');
+                    },
+                    child: Text(
+                      myProvider.AddDegit(teamB),
+                      style: GoogleFonts.robotoMono(fontSize: 120),
 
+                    ),
+
+                  )
+                ],
+
+              )
+
+            ]
+        )
+    ),
+        const SizedBox(
+          height: 30,
         ),
-    ],
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+                onPressed: (){
+                  RemoveScore();
+                },
+                child: const Text("-")
+            ),
+            SizedBox(width: 10),
+            ElevatedButton(
+                onPressed: (){
+                  AddScore();
+                },
+                child: const Text("+")),
+          ],
+        ),
+        const SizedBox(
+          height: 30,
+        ),
+
+      ],
+    )
     );
   }
 }
