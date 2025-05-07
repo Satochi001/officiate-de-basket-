@@ -36,7 +36,7 @@ flutter pub get
 For mobile (Android/iOS):
 ```bash
 flutter run
-```
+````
 
 ## 🏗 Project Status
 👉 **MVP Stage** – Currently under development.
